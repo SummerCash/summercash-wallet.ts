@@ -1,0 +1,17 @@
+{
+  "name": "summercash-wallet.ts",
+  "version": "1.0.0",
+  "description": "A typescript wrapper for the custodial SummerCash wallet API.",
+  "main": "index.js",
+  "repository": "git@github.com:SummerCash/summercash-wallet.ts",
+  "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^1.10.2",
+    "@typescript-eslint/parser": "^1.10.2",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^5.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "prettier": "^1.18.2"
+  }
+}
