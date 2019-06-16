@@ -1,6 +1,7 @@
 import { Accounts } from '../src/accounts'; // Import accounts class
 import { expect } from 'chai'; // Import testing util
 import 'mocha'; // Import testing util
+import { resolve } from 'path';
 
 const api = new Accounts('https://summer.cash:2053/api'); // Initialize API
 
@@ -36,6 +37,14 @@ describe('queryAccount()', () => {
     });
 });
 
+describe('getAccountBalance()', () => {
+    it('should return the balance of the given account', async () => {
+        const balance = await api.getAccountBalance('dowlandaiello'); // Get balance
+
+        expect(balance > 0, 'Account should have non-zero balance.'); // Panic
+    });
+});
+
 describe('getLastUserTxHash()', () => {
     it('should get the last tx hash of the given account', async () => {
         const lastHash = await api.getLastUserTxHash('dowlandaiello'); // Last tx hash
@@ -44,10 +53,12 @@ describe('getLastUserTxHash()', () => {
     });
 });
 
-describe('getAccountBalance()', () => {
-    it('should return the balance of the given account', async () => {
-        const balance = await api.getAccountBalance('dowlandaiello'); // Get balance
+describe('resolveAddress()', () => {
+    it('should resolve a username', async () => {
+        const user = await api.queryAccount('dowlandaiello'); // Get user
 
-        expect(balance > 0, 'Account should have non-zero balance.'); // Panic
+        const resolvedUser = await api.resolveAddress(user.address); // Resolve address
+
+        expect(user.username === resolvedUser, 'should resolve address'); // Ensure resolves correctly
     });
 });

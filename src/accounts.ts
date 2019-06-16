@@ -6,12 +6,16 @@ export class Accounts {
     /** Endpoint */
     endpoint: string;
 
+    /** Base Endpoint */
+    globalEndpoint: string;
+
     /**
      * Initialize a new Accounts api instance.
      *
      * @param {string} endpoint - The endpoint to connect to.
      */
     constructor(endpoint: string) {
+        this.globalEndpoint = endpoint; // Set global endpoint
         this.endpoint = `${endpoint}/accounts`; // Set endpoint
     }
 
@@ -95,6 +99,29 @@ export class Accounts {
     }
 
     /**
+     * Find the balance of a given account.
+     *
+     * @param {string} username The username of the account to find the balance of.
+     */
+    async getAccountBalance(username: string): Promise<number> {
+        const response = await fetch(`${this.endpoint}/${username}/balance`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        }); // Do request
+
+        const parsed = await response.json(); // Parse response
+
+        if (parsed.error) {
+            // Check for errors in parsed response
+            throw new Error(parsed.error); // Throw error
+        }
+
+        return parsed.balance; // Return balance
+    }
+
+    /**
      * Request all transactions of the given account.
      *
      * @param {string} username The username of the account chain to open.
@@ -141,12 +168,12 @@ export class Accounts {
     }
 
     /**
-     * Find the balance of a given account.
+     * Get the user account associated with a given address.
      *
-     * @param {string} username The username of the account to find the balance of.
+     * @param {string} address The address to resolve.
      */
-    async getAccountBalance(username: string): Promise<number> {
-        const response = await fetch(`${this.endpoint}/${username}/balance`, {
+    async resolveAddress(address: string): Promise<string> {
+        const response = await fetch(`${this.globalEndpoint}/addresses/resolve/${address}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -160,6 +187,6 @@ export class Accounts {
             throw new Error(parsed.error); // Throw error
         }
 
-        return parsed.balance; // Return balance
+        return parsed.username; // Return username
     }
 }
