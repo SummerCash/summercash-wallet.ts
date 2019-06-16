@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "module": "es6",
-    "target": "es6",
-    "declaration": true,
-    "outDir": "./dist"
-  },
-  "include": ["src/**/*"]
+    "compilerOptions": {
+        "module": "commonjs",
+        "declaration": true,
+        "outDir": "./dist",
+        "lib": ["es2017", "dom"]
+    },
+    "include": ["src/**/*"]
 }
