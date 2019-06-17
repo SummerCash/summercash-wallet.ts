@@ -1,11 +1,19 @@
 {
     "name": "@summercash/summercash-wallet.ts",
     "version": "1.0.0",
+    "private": false,
     "description": "A typescript wrapper for the custodial SummerCash wallet API.",
     "main": "index.js",
     "repository": "git@github.com:SummerCash/summercash-wallet.ts",
     "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
     "license": "Apache-2.0",
+    "keywords": [
+        "crypto",
+        "api",
+        "api-wrapper",
+        "summercash",
+        "summertech"
+    ],
     "scripts": {
         "test": "mocha --timeout 5000 --require ts-node/register tests/**/*.ts"
     },
