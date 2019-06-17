@@ -59,6 +59,42 @@ describe('resolveAddress()', () => {
 
         const resolvedUser = await api.resolveAddress(user.address); // Resolve address
 
-        expect(user.username === resolvedUser, 'should resolve address'); // Ensure resolves correctly
+        expect(user.username === resolvedUser, 'Should resolve address.'); // Ensure resolves correctly
+    });
+});
+
+describe('authenticate()', () => {
+    it('should authenticate a given user', async () => {
+        const username = Math.round(Math.pow(36, 14 + 1) - Math.random() * Math.pow(36, 14))
+            .toString(36)
+            .slice(1); // Username
+
+        const password = Math.round(Math.pow(36, 14 + 1) - Math.random() * Math.pow(36, 14))
+            .toString(36)
+            .slice(1); // Password
+
+        await api.newAccount(username, password); // Init account with random user and pwd
+
+        const canAuthenticate = await api.authenticate(username, password); // Auth
+
+        expect(canAuthenticate, 'Should be able to authenticate.'); // Ensure can authenticate
+    });
+});
+
+describe('issueToken()', () => {
+    it('should issue a new token', async () => {
+        const username = Math.round(Math.pow(36, 14 + 1) - Math.random() * Math.pow(36, 14))
+            .toString(36)
+            .slice(1); // Username
+
+        const password = Math.round(Math.pow(36, 14 + 1) - Math.random() * Math.pow(36, 14))
+            .toString(36)
+            .slice(1); // Password
+
+        await api.newAccount(username, password); // Init account with random user and pwd
+
+        const token = await api.issueToken(username, password); // Issue token
+
+        expect(token.length > 0, 'Token should not be nil.'); // Ensure has token
     });
 });

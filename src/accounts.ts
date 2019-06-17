@@ -189,4 +189,86 @@ export class Accounts {
 
         return parsed.username; // Return username
     }
+
+    /**
+     * Check that a password or token corresponding to a given account is valid.
+     *
+     * @param {string} username The username of the account to authenticate.
+     * @param {string} password The password or auth token of the account.
+     */
+    async authenticate(username: string, password: string): Promise<boolean> {
+        const response = await fetch(`${this.endpoint}/${username}/authenticate`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username, // Set username
+                password: password, // Set password
+            }),
+        }); // Do request
+
+        const parsed = await response.json(); // Parse response
+
+        if (parsed.error) {
+            // Check for errors in parsed response
+            throw new Error(parsed.error); // Throw error
+        }
+
+        return true; // Authenticated ree
+    }
+
+    /**
+     * Issue an access token for the given account.
+     *
+     * @param username The username of the account to issue a token for.
+     * @param password The password of the corresponding account.
+     */
+    async issueToken(username: string, password: string): Promise<string> {
+        const response = await fetch(`${this.endpoint}/${username}/token`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username, // Set username
+                password: password, // Set password
+            }),
+        }); // Do request
+
+        const parsed = await response.json(); // Parse response
+
+        if (parsed.error) {
+            // Check for errors in parsed response
+            throw new Error(parsed.error); // Throw error
+        }
+
+        return parsed.token; // Return token
+    }
+
+    /**
+     *
+     * @param {string} username The username of the account to set a fcm token for.
+     * @param {string} password The password of the account to set a fcm token for.
+     */
+    async setFcmToken(username: string, password: string, token: string) {
+        const response = await fetch(`${this.endpoint}/${username}/pushtoken`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username, // Set username
+                password: password, // Set password
+                fcm_token: token, // Set token
+            }),
+        }); // Do request
+
+        const parsed = await response.json(); // Parse response
+
+        if (parsed.error) {
+            // Check for errors in parsed response
+            throw new Error(parsed.error); // Throw error
+        }
+    }
 }
