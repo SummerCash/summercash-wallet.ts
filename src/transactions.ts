@@ -1,4 +1,5 @@
 import fetch from 'cross-fetch'; // Import fetch
+import * as btoa from 'btoa'; // Btoa
 
 /** The transactions API wrapper. */
 export class Transactions {

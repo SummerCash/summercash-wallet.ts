@@ -1,7 +1,6 @@
 import { Accounts } from '../src/accounts'; // Import accounts class
 import { expect } from 'chai'; // Import testing util
 import 'mocha'; // Import testing util
-import { resolve } from 'path';
 
 const api = new Accounts('https://summer.cash:2053/api'); // Initialize API
 
