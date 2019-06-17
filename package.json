@@ -1,5 +1,5 @@
 {
-    "name": "summercash-wallet.ts",
+    "name": "@summercash/summercash-wallet.ts",
     "version": "1.0.0",
     "description": "A typescript wrapper for the custodial SummerCash wallet API.",
     "main": "index.js",
