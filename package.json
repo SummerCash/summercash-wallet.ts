@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "private": false,
     "description": "A typescript wrapper for the custodial SummerCash wallet API.",
-    "main": "src/module.ts",
+    "main": "dist/module.js",
     "repository": "git@github.com:SummerCash/summercash-wallet.ts",
     "author": "Dowland Aiello <mitsukomegumii@gmail.com>",
     "license": "Apache-2.0",
@@ -15,7 +15,8 @@
         "summertech"
     ],
     "scripts": {
-        "test": "mocha --timeout 5000 --require ts-node/register tests/**/*.ts"
+        "test": "mocha --timeout 5000 --require ts-node/register tests/**/*.ts",
+        "build": "rollup -c"
     },
     "devDependencies": {
         "@babel/preset-env": "^7.4.5",
@@ -30,6 +31,11 @@
         "mocha": "^6.1.4",
         "node-fetch": "^2.6.0",
         "prettier": "^1.18.2",
+        "rollup": "^1.16.1",
+        "rollup-plugin-commonjs": "^10.0.0",
+        "rollup-plugin-node-resolve": "^5.0.3",
+        "rollup-plugin-peer-deps-external": "^2.2.0",
+        "rollup-plugin-typescript2": "^0.21.2",
         "ts-node": "^8.3.0",
         "typescript": "^3.5.2"
     },
